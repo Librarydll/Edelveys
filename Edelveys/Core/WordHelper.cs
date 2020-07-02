@@ -15,11 +15,16 @@ namespace Edelveys.Core
 {
 	public class WordHelper
 	{
-		private static int width = 240;
-		private static int height = 163;
+		private int width = 240;
+		private int height = 163;
+
+		private int imageW = 700;
+		private int imageH = 130;
 		private readonly string _saveWordDocumentsPath = Path.Combine(Directory.GetCurrentDirectory(), "ready.docx");
+		private readonly string _saveWordDocumentsPath2 = Path.Combine(Directory.GetCurrentDirectory(), "ready2.docx");
 
 		private readonly string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "template.docx");
+		private readonly string templatePath2 = Path.Combine(Directory.GetCurrentDirectory(), "templatealbum.docx");
 		public string FIO { get; set; } = "<FIO>";
 		public string DATE { get; set; } = "<DATE>";
 		public string AGE { get; set; } = "<AGE>";
@@ -35,13 +40,23 @@ namespace Edelveys.Core
 			{
 				CreateDocument(person, filepathCollection);
 
-				_document.SaveAs(EnsureCreateFile());
+				_document.SaveAs(EnsureCreateFile(templatePath,_saveWordDocumentsPath));
 				Process.Start(_saveWordDocumentsPath);
 
 			}
 		}
+		public void CreateImage(IEnumerable<string> filepathCollection) 	
+		{
+			using (_document = DocX.Load(templatePath2))
+			{
+				CreateImageDocument(filepathCollection);
 
-		private void CreateDocument(Person person, IEnumerable<ImageSource> filepathCollection)
+				_document.SaveAs(EnsureCreateFile(templatePath2, _saveWordDocumentsPath2));
+				Process.Start(_saveWordDocumentsPath2);
+
+			}
+		}
+		private void CreateDocument(Person person, IEnumerable<string> filepathCollection)
 		{
 			try
 			{
@@ -90,15 +105,40 @@ namespace Edelveys.Core
 			}
 		}
 
-		public string EnsureCreateFile()
+		private void CreateImageDocument(IEnumerable<string> filepathCollection)
 		{
-			if (File.Exists(_saveWordDocumentsPath))
+			try
 			{
-				File.Delete(_saveWordDocumentsPath);
+				ImageHelper.CreateAndFitImages(filepathCollection);
+				var image1 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "1.jpeg"));
+				var image2 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "2.jpeg"));
+				var image3 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "3.jpeg"));
+				var image4 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "4.jpeg"));
+				var picture1 = image1.CreatePicture(imageH, imageW);
+				var picture2 = image2.CreatePicture(imageH, imageW);
+				var picture3 = image3.CreatePicture(imageH, imageW);
+				var picture4 = image4.CreatePicture(imageH, imageW);
+
+				_document.Paragraphs[0].InsertPicture(picture1);
+				_document.Paragraphs[0].InsertPicture(picture2);
+				_document.Paragraphs[0].InsertPicture(picture3);
+				_document.Paragraphs[0].InsertPicture(picture4);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
+
+		public string EnsureCreateFile(string path, string fileName)
+		{
+			if (File.Exists(fileName))
+			{
+				File.Delete(fileName);
 			}
 
-			File.Copy(templatePath, _saveWordDocumentsPath);
-			return _saveWordDocumentsPath;
+			File.Copy(path, fileName);
+			return fileName;
 		}
 
 		
