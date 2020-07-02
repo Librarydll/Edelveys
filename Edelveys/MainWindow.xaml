@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Главное окно" Height="500" Width="550">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -15,18 +15,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <ToolBar Grid.ColumnSpan="2">
-                <Button Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click" Margin="2"  VerticalAlignment="Stretch">
+                <Button Background="#FFE8E8E8" Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click" Margin="10,2"  VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="  Сгенерировать файл"/>
+                        <TextBlock Text="Сгенерировать файл" Margin="5,0"/>
                     </StackPanel>
                 </Button>
-                <Button Height="40"  FontSize="20" FontWeight="Bold" Click="Button_Click_2" Margin="2" VerticalAlignment="Stretch">
+                <Button Background="#FFE8E8E8" Height="40"  FontSize="20" FontWeight="Bold" Click="Button_Click_2" Margin="2" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Очистить"/>
+                        <TextBlock Text="Очистить" Margin="5,0"/>
                     </StackPanel>
                 </Button>
             </ToolBar>
@@ -40,22 +40,19 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock FontSize="18" FontWeight="Bold" Margin="5">Ф.И.О</TextBlock>
-                <TextBox Padding="0 0 0 5" FontSize="18" Height="30" FontWeight="DemiBold" x:Name="fio"  Margin="5" Width="400" Grid.Column="1"></TextBox>
+                <TextBlock FontSize="18" FontWeight="Bold" Margin="5">Ф.И.О.</TextBlock>
+                <TextBox Padding="0 0 0 5" FontSize="18" Height="30" FontWeight="DemiBold" x:Name="fio"  Margin="5" Width="400" Grid.Column="1" HorizontalAlignment="Left"></TextBox>
                 <TextBlock  FontSize="18" FontWeight="Bold" Margin="5" Grid.Row="1">Возраст</TextBlock>
                 <TextBox  Padding="0 0 0 5" FontSize="18" Height="30" FontWeight="DemiBold"  x:Name="age" Margin="5" HorizontalAlignment="Left" Width="400" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center"></TextBox>
             </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AllowDrop="True" Grid.Row="2" Grid.ColumnSpan="2">
+            <Rectangle Name="sWidth" Margin="5,0,22,0" Visibility="Hidden"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AllowDrop="True" Grid.Row="2">
                 <Border AllowDrop="True" Margin="5" BorderBrush="Black" BorderThickness="2" >
-                    <StackPanel AllowDrop="True"  Orientation="Vertical">
-
-                        <Image Height="190"  x:Name="image1" Stretch="Fill" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop"  AllowDrop="True"></Image>
-
-                        <Image Height="190" x:Name="image2" Stretch="Fill" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop"  AllowDrop="True"  Grid.Column="1"></Image>
-
-                        <Image Height="190" x:Name="image3" Stretch="Fill" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop" AllowDrop="True"  Grid.Column="2"></Image>
-
-                        <Image Height="190" x:Name="image4" Stretch="Fill" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop" AllowDrop="True" Grid.Column="3"></Image>
+                    <StackPanel Width="{Binding ElementName=sWidth, Path=ActualWidth}" AllowDrop="True"  Orientation="Vertical">
+                        <Image   x:Name="image1" Stretch="Uniform" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop"  AllowDrop="True"></Image>
+                        <Image  x:Name="image2" Stretch="Uniform" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop"  AllowDrop="True"></Image>
+                        <Image  x:Name="image3" Stretch="Uniform" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop" AllowDrop="True"></Image>
+                        <Image  x:Name="image4" Stretch="Uniform" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop" AllowDrop="True"></Image>
                     </StackPanel>
                 </Border>
             </ScrollViewer>
@@ -68,5 +65,5 @@
             </Button>
         </StackPanel>-->
         </Grid>
-    </ScrollViewer>
+    <!--</ScrollViewer>-->
 </Window>

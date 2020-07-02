@@ -36,7 +36,7 @@ namespace Edelveys.Core
 
 		}
 
-		public static void CreateAndFitImages(IEnumerable<string> files)
+		public static void CreateAndFitImages(IEnumerable<ImageSource> files)
 		{
 			DeleteFiles();
 			try
@@ -46,7 +46,7 @@ namespace Edelveys.Core
 				{
 					var outputImage = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
 					var graphics = Graphics.FromImage(outputImage);
-					var img = new Bitmap(file);
+					var img = GetBitmap((BitmapSource)file);
 					graphics.DrawImage(img, new Rectangle(0, 0, width, height),
 					new Rectangle(0, 0, img.Width, img.Height), GraphicsUnit.Pixel);
 					outputImage.Save(i.ToString()+".jpeg", ImageFormat.Jpeg);
@@ -57,6 +57,25 @@ namespace Edelveys.Core
 			{
 				MessageBox.Show(ex.Message);
 			}
+		}
+
+		public static Bitmap GetBitmap(BitmapSource source)
+		{
+			Bitmap bmp = new Bitmap(
+			  source.PixelWidth,
+			  source.PixelHeight,
+			  System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+			BitmapData data = bmp.LockBits(
+			  new Rectangle(System.Drawing.Point.Empty, bmp.Size),
+			  ImageLockMode.WriteOnly,
+			  System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+			source.CopyPixels(
+			  Int32Rect.Empty,
+			  data.Scan0,
+			  data.Height * data.Stride,
+			  data.Stride);
+			bmp.UnlockBits(data);
+			return bmp;
 		}
 
 		public static void DeleteFiles()

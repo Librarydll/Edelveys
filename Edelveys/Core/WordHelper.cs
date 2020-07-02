@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -27,7 +28,7 @@ namespace Edelveys.Core
 		{
 
 		}
-		public void Create(Person person, IEnumerable<string> filepathCollection)
+		public void Create(Person person, IEnumerable<ImageSource> filepathCollection)
 		{
 
 			using (_document = DocX.Load(templatePath))
@@ -39,8 +40,8 @@ namespace Edelveys.Core
 
 			}
 		}
-		//asdasd
-		private void CreateDocument(Person person, IEnumerable<string> filepathCollection)
+
+		private void CreateDocument(Person person, IEnumerable<ImageSource> filepathCollection)
 		{
 			try
 			{
