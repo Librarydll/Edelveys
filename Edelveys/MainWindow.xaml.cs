@@ -112,5 +112,9 @@ namespace Edelveys
 			image4.Source = defaultImage;
 		}
 
+		private void Button_Click_3(object sender, RoutedEventArgs e)
+		{
+			_wordHelper.CreateImage(_imageContainer.ImagePathes);
+		}
 	}
 }

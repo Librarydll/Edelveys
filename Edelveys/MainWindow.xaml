@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Edelveys"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Главное окно" Height="500" Width="550">
+        Title="Главное окно" Height="500" Width="566">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -22,6 +22,11 @@
                 <Button Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click" Margin="2"  VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="  Сгенерировать файл"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click_3" Margin="2"  VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Сгенерировать фотографии"/>
                     </StackPanel>
                 </Button>
                 <Button Height="40"  FontSize="20" FontWeight="Bold" Click="Button_Click_2" Margin="2" VerticalAlignment="Stretch">
