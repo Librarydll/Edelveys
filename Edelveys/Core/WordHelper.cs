@@ -18,8 +18,8 @@ namespace Edelveys.Core
 		private int width = 240;
 		private int height = 163;
 
-		private int imageW = 700;
-		private int imageH = 130;
+		private int imageW = 370;
+		private int imageH = 200;
 		private readonly string _saveWordDocumentsPath = Path.Combine(Directory.GetCurrentDirectory(), "ready.docx");
 		private readonly string _saveWordDocumentsPath2 = Path.Combine(Directory.GetCurrentDirectory(), "ready2.docx");
 
@@ -42,10 +42,9 @@ namespace Edelveys.Core
 
 				_document.SaveAs(EnsureCreateFile(templatePath,_saveWordDocumentsPath));
 				Process.Start(_saveWordDocumentsPath);
-
 			}
 		}
-		public void CreateImage(IEnumerable<string> filepathCollection) 	
+		public void CreateImage(IEnumerable<ImageSource> filepathCollection) 	
 		{
 			using (_document = DocX.Load(templatePath2))
 			{
@@ -53,10 +52,9 @@ namespace Edelveys.Core
 
 				_document.SaveAs(EnsureCreateFile(templatePath2, _saveWordDocumentsPath2));
 				Process.Start(_saveWordDocumentsPath2);
-
 			}
 		}
-		private void CreateDocument(Person person, IEnumerable<string> filepathCollection)
+		private void CreateDocument(Person person, IEnumerable<ImageSource> filepathCollection)
 		{
 			try
 			{
@@ -96,7 +94,6 @@ namespace Edelveys.Core
 					var picture = image.CreatePicture(height, width);
 					//curruntTable.Rows[1].Cells[1].Paragraphs[0].InsertPicture(picture);
 					curruntTable.Rows[1].Cells[1].Paragraphs[0].InsertPicture(picture);
-
 				}
 			}
 			catch (Exception ex)
@@ -105,24 +102,50 @@ namespace Edelveys.Core
 			}
 		}
 
-		private void CreateImageDocument(IEnumerable<string> filepathCollection)
+		private void CreateImageDocument(IEnumerable<ImageSource> filepathCollection)
 		{
 			try
 			{
 				ImageHelper.CreateAndFitImages(filepathCollection);
-				var image1 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "1.jpeg"));
-				var image2 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "2.jpeg"));
-				var image3 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "3.jpeg"));
-				var image4 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "4.jpeg"));
-				var picture1 = image1.CreatePicture(imageH, imageW);
-				var picture2 = image2.CreatePicture(imageH, imageW);
-				var picture3 = image3.CreatePicture(imageH, imageW);
-				var picture4 = image4.CreatePicture(imageH, imageW);
+				//var image1 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "1.jpeg"));
+				//var image2 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "2.jpeg"));
+				//var image3 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "3.jpeg"));
+				//var image4 = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "4.jpeg"));
+				//var picture1 = image1.CreatePicture(imageH, imageW);
+				//var picture2 = image2.CreatePicture(imageH, imageW);
+				//var picture3 = image3.CreatePicture(imageH, imageW);
+				//var picture4 = image4.CreatePicture(imageH, imageW);
 
-				_document.Paragraphs[0].InsertPicture(picture1);
-				_document.Paragraphs[0].InsertPicture(picture2);
-				_document.Paragraphs[0].InsertPicture(picture3);
-				_document.Paragraphs[0].InsertPicture(picture4);
+				//_document.Paragraphs[0].InsertPicture(picture1);
+				//_document.Paragraphs[0].InsertPicture(picture2);
+				//_document.Paragraphs[0].InsertPicture(picture3);
+				//_document.Paragraphs[0].InsertPicture(picture4);
+				var curruntTable = _document.Tables[0];
+				var count = filepathCollection.Count();
+				if (count >= 1)
+				{
+					var image = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "1.jpeg"));
+					var picture = image.CreatePicture(imageH, imageW);
+					curruntTable.Rows[0].Cells[0].Paragraphs[0].InsertPicture(picture);
+				}
+				if (count >= 2)
+				{
+					var image = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "2.jpeg"));
+					var picture = image.CreatePicture(imageH, imageW);
+					curruntTable.Rows[0].Cells[1].Paragraphs[0].InsertPicture(picture);
+				}
+				if (count >= 3)
+				{
+					var image = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "3.jpeg"));
+					var picture = image.CreatePicture(imageH, imageW);
+					curruntTable.Rows[1].Cells[0].Paragraphs[0].InsertPicture(picture);
+				}
+				if (count >= 4)
+				{
+					var image = _document.AddImage(Path.Combine(Directory.GetCurrentDirectory(), "4.jpeg"));
+					var picture = image.CreatePicture(imageH, imageW);
+					curruntTable.Rows[1].Cells[1].Paragraphs[0].InsertPicture(picture);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -140,8 +163,5 @@ namespace Edelveys.Core
 			File.Copy(path, fileName);
 			return fileName;
 		}
-
-		
-
 	}
 }

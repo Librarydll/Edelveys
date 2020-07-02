@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Edelveys"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Главное окно" Height="500" Width="550">
+        Title="Главное окно" Height="500" Width="700">
     <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
         <Grid>
             <Grid.RowDefinitions>
@@ -24,12 +24,12 @@
                         <TextBlock Text="Сгенерировать файл" Margin="5,0"/>
                     </StackPanel>
                 </Button>
-                <Button Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click_3" Margin="2"  VerticalAlignment="Stretch">
+                <Button Background="#FFE8E8E8" Height="40" FontSize="20" FontWeight="Bold" Click="Button_Click_3" Margin="2"  VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Сгенерировать фотографии"/>
+                    <TextBlock Text="Сгенерировать фотографии" Margin="5,0"/>
                     </StackPanel>
                 </Button>
-                <Button Height="40"  FontSize="20" FontWeight="Bold" Click="Button_Click_2" Margin="2" VerticalAlignment="Stretch">
+            <Button Background="#FFE8E8E8" Height="40"  FontSize="20" FontWeight="Bold" Click="Button_Click_2" Margin="10,2" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Очистить" Margin="5,0"/>
                     </StackPanel>
@@ -51,7 +51,7 @@
                 <TextBox  Padding="0 0 0 5" FontSize="18" Height="30" FontWeight="DemiBold"  x:Name="age" Margin="5" HorizontalAlignment="Left" Width="400" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center"></TextBox>
             </Grid>
             <Rectangle Name="sWidth" Margin="5,0,22,0" Visibility="Hidden"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AllowDrop="True" Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Grid.Row="2">
                 <Border AllowDrop="True" Margin="5" BorderBrush="Black" BorderThickness="2" >
                     <StackPanel Width="{Binding ElementName=sWidth, Path=ActualWidth}" AllowDrop="True"  Orientation="Vertical">
                         <Image   x:Name="image1" Stretch="Uniform" Source="/Resources/drag.png" PreviewDrop="Image_PreviewDrop"  AllowDrop="True"></Image>
